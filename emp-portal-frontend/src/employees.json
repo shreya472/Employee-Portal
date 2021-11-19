@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "userid": "2022",
+        "name": "Patrick Jane",
+        "email": "jane.patrick@cbi.com",
+        "address": "California",
+        "doj": "Nov 9, 2021"
+    }
+]

@@ -1,0 +1,30 @@
+button {
+  margin: 10px;
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: solid 1px black;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 14px;
+}
+
+th {
+  background-color: #04aa6d;
+}
+
+.employeediv {
+  overflow-x: auto;
+}
+
+input {
+  padding: 8px 5px;
+  margin: 8px 5px;
+  box-sizing: border-box;
+}
