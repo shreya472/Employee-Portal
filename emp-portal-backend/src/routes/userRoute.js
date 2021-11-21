@@ -3,12 +3,8 @@ const router = express.Router();
 const users = require("../utilities/users");
 const userModel = require("../model/userModel");
 
-console.log("Hello");
-
 router.post("/addUser", (req, res, next) => {
-  console.log(req.body);
   let userDetailObj = new users(req.body);
-  console.log(userDetailObj);
   userModel
     .addNewUser(userDetailObj)
     .then((response) => {
@@ -17,4 +13,22 @@ router.post("/addUser", (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.get("/allUser", (req, res, next) => {
+  userModel
+    .getAllUser()
+    .then((allUser) => {
+      res.json(allUser);
+    })
+    .catch((err) => next(err));
+});
+
+router.delete("/deleteUser/:id", (req, res, next) => {
+  let userIdToDelete = Number(req.params.id);
+  userModel
+    .deleteUser(userIdToDelete)
+    .then((deleteMessage) => {
+      res.send(deleteMessage);
+    })
+    .catch((err) => next(err));
+});
 module.exports = router;

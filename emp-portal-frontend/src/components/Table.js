@@ -1,12 +1,25 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-// Table component
 const Table = () => {
-  let arr = [];
-  for (var i = 0; i <= localStorage.length; i++) {
-    var a = localStorage.key(i);
-    arr.push(localStorage.getItem(a));
-  }
+  const [arr, updateArr] = useState([]);
+
+  const getData = () => {
+    axios
+      .get("http://localhost:4000/user/allUser")
+      .then((dataFromBackend) => {
+        if (dataFromBackend) {
+          updateArr(dataFromBackend.data);
+        }
+      })
+      .catch((error) => {
+        console.log("OH NO", error);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
@@ -21,22 +34,26 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {arr.map((ele) => {
-            if (ele !== null && ele !== "") {
-              const items = JSON.parse(ele);
-              return (
-                <tr>
-                  <td>{items.userid} </td>
-                  <td>{items.name} </td>
-                  <td>{items.email} </td>
-                  <td>{items.address} </td>
-                  <td>{items.doj}</td>
-                </tr>
-              );
-            } else {
-              return null;
-            }
-          })}
+          {arr.length > 0 ? (
+            arr.map((ele) => {
+              if (ele !== null && ele !== "") {
+                const items = ele;
+                return (
+                  <tr>
+                    <td key="userid">{items.userid} </td>
+                    <td key="name">{items.name} </td>
+                    <td key="email">{items.email} </td>
+                    <td key="address">{items.address} </td>
+                    <td key="doj">{items.doj}</td>
+                  </tr>
+                );
+              } else {
+                return null;
+              }
+            })
+          ) : (
+            <tr></tr>
+          )}
         </tbody>
       </table>
     </div>
@@ -44,3 +61,11 @@ const Table = () => {
 };
 
 export default Table;
+
+// // Table component
+// const Table = () => {
+//   let arr = [];
+//   for (var i = 0; i <= localStorage.length; i++) {
+//     var a = localStorage.key(i);
+//     arr.push(localStorage.getItem(a));
+//   }

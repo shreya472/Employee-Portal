@@ -18,12 +18,13 @@ const Screen2 = () => {
 
   // on submit
   const handleAddUser = (event) => {
-    event.preventDefault();
+    //console.log("Hello");
     // localStorage.setItem(formData.userid, JSON.stringify(formData));
+
     axios
-      .post("https://localhost:4000/user/addUser", formData)
+      .post("http://localhost:4000/user/addUser", formData)
       .then((response) => {
-        console.log("YAY", response);
+        console.log("OK", response);
       })
       .catch((error) => {
         console.log("OH NO", error);
